@@ -1,18 +1,18 @@
-import { Oruga } from "./sistema-de-traccion/oruga";
 import { SistemaDeTraccion } from "./sistema-de-traccion/sistema-de-traccion";
 
-export class Robot {
+const POTENCIA_BASE_DEFAULT = 10;
 
+export class Robot {
   
   private nombre: string;
   private numeroSerie: string;
   private potenciaBase: number;
   private sistemaTraccion: SistemaDeTraccion;
 
-  constructor(traccion: SistemaDeTraccion, nombre?: string, numeroSerie?: string, potenciaBase?: number) {
+  public constructor(traccion: SistemaDeTraccion, nombre?: string, numeroSerie?: string, potenciaBase?: number) {
     this.nombre = nombre ?? "KT-2020";
     this.numeroSerie = numeroSerie ?? "KT-2020-P";
-    this.potenciaBase = potenciaBase ?? 10;
+    this.potenciaBase = potenciaBase ?? POTENCIA_BASE_DEFAULT;
     this.sistemaTraccion = traccion;
   }
 
@@ -25,15 +25,19 @@ export class Robot {
   }
   
   public getPotenciaTraccionFinal(): number {
-    return this.potenciaBase;
+    return this.potenciaBase - this.sistemaTraccion.getPotencia();
   }
 
   public getTipoDeTraccion(): string {
-    return this.sistemaTraccion.
+    return this.sistemaTraccion.getNombre();
   } 
 
   public avanzar(metros: number): number {
     return this.sistemaTraccion.avanzar(metros);
+  }
+
+  public getVidaUtil(): number {
+    return this.sistemaTraccion.getVidaUtil();
   }
 
 }

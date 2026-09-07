@@ -14,6 +14,14 @@ export abstract class SistemaDeTraccion {
     return this.potencia;
   }
 
+  public getNombre(): string {
+    return `Soy un sistema de tracción de tipo ${this.doGetNombre()}`; 
+  }
+
+  public getVidaUtil(): number {
+    return this.vidaUtil;
+  }
+
   public avanzar(metros: number): number {
     this.vidaUtil = this.vidaUtil - metros;
     let avance = metros;
@@ -24,8 +32,10 @@ export abstract class SistemaDeTraccion {
     return avance;
   }
 
-  public reemplazar(): boolean {
+  public debeReemplazar(): boolean {
     return this.vidaUtil === SistemaDeTraccion.vidaUtilMinima;
   }
+
+  protected abstract doGetNombre(): string;
 }
 
