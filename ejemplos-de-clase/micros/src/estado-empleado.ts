@@ -1,0 +1,5 @@
+export enum ESTADO_EMPLEADO {
+  ESPERANDO,
+  PARADO,
+  SENTADO
+}

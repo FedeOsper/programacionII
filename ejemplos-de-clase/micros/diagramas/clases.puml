@@ -1,0 +1,47 @@
+@startuml
+
+title Ejercicio micros
+
+enum ESTADO_EMPLEADO {
+  ESPERANDO,
+  PARADO,
+  SENTADO
+}
+
+class Micro {
+    - lugaresSentados: number
+    - lugaresParados: number
+    - volumen: number
+    - pasajeros: Empleado[]
+
+    -- getters y setters --
+
+    + subirPasajero(p: Empleado)
+    + bajarPasajero(p?: Empleado)
+    + primerPasajeroEnSubir(): Empleado
+}
+
+abstract class Empleado {
+    - legajo: number
+    - nombreCompleto: string
+    - esJefe: boolean
+    - jefe: Empleado
+    ' - empleados: Empleado[]
+    - estado: ESTADO_EMPLEADO
+
+    -- getters y setters --
+
+    + abstract quiereSubir(m: Micro): boolean 
+    + sosJefe(): boolean
+}
+
+class Apurado extends Empleado { }
+class Claustrofobico extends Empleado { }
+class Fiaca extends Empleado { }
+class Moderado extends Empleado { }
+class Obsecuente extends Empleado { }
+
+' relación
+Micro *-r- Empleado
+
+@enduml

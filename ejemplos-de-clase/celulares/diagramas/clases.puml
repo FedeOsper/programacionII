@@ -1,0 +1,64 @@
+@startuml
+
+title Diagrama de Clases - Celulares
+
+class Persona {
+
+    - nombre: string
+    - celular: Celular
+
+    + getNombre(): string
+    + tieneCelularApagado(): boolean
+    + llamarPorCelular(destinatario: Persona, duracion: number): void
+}
+
+abstract class Celular {
+    - marca: string
+    - modelo: string
+    - bateria: Bateria
+    - numero: number
+
+    + getMarca(): string
+    + getModelo(): string
+    + getNumero(): number
+    + llamar(destino: Celular, duracion: number): number
+    + getCargaBateria(): number
+    + getCargaBateriaPorcentaje(): number
+    + estaApagado(): boolean
+    + recargar(): void
+    # {abstract} calcularCostoLlamada(duracion: number): number
+}
+
+class MotorolaG5 {
+    - costoPorLlamada: number
+    # calcularCostoLlamada(duracion: number): number
+}
+
+class Iphone {
+    - porcentajePerdidaPorUnidad: number
+    - porcentajeTotal: number
+    # calcularCostoLlamada(duracion: number): number
+}
+
+class Bateria {
+    - capacidadMaxima: number
+    - puntosDeCarga: number
+
+    + getEstado(): number
+    + getCapacidadMaxima(): number
+    + cargar(puntos: number): void
+}
+
+class ErrorTelefonoApagado {
+    - mensaje: string
+    + getMensaje(): string
+}
+
+' relaciones
+Persona o-- Celular
+Celular *-r- Bateria
+Celular <|-- MotorolaG5
+Celular <|-- Iphone
+Celular ..> ErrorTelefonoApagado : lanza
+
+@enduml
