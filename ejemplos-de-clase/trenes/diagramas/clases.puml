@@ -1,0 +1,70 @@
+@startuml
+
+' skinparam Linetype ortho
+
+title "**Trenes**"
+
+enum EstadoFormacion {
+    DETENIDA,
+    MOVIMIENTO,
+    ENDEPOSITO
+}
+
+class Locomotora {
+    - peso: number
+    - pesoArrastre: number
+    - velocidadMax: number
+
+    + getArrastreUtil(): number
+
+}
+
+abstract class Vagon {
+    + cantidadDePasajerosATransportar(): number    
+    + pesoMaximo(): number
+}
+
+class VagonPasajero {
+    - largo: number
+    - ancho: number
+
+}
+
+class VagonCarga {
+    - cargaMaxima: number
+
+}
+
+' Tren = Formacion
+class Formacion {
+
+    - estado: EstadoFormacion
+    - locomotoras: Locomotora[]
+    - vagones: Vagon[]
+
+    + esCompleja(): boolean
+    + estaDetenida(): boolean
+    + estaEnDeposito(): boolean
+    + sePuedeAgregarLocomotora(): boolean
+    + kilosEmpujeFaltante(): number
+}
+
+class Deposito {
+    - formaciones: Formacion[]
+    - locomotoras: Locomotora[]
+    - vagones: Vagon[]
+
+    + necesitaConductorExperimentado(): boolean
+}
+
+' relaciones
+
+Vagon <|-d- VagonCarga
+Vagon <|-d- VagonPasajero
+
+Formacion *-l- Locomotora
+Formacion *-r- Vagon
+
+Deposito o.. Formacion
+
+@enduml
