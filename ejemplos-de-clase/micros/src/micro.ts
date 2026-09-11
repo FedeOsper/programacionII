@@ -41,8 +41,12 @@ export default class Micro {
   
   public subirPasajero(pasajero: Empleado): void {
 
-    if (this.getLugaresLibresTotales() <= 0 || !pasajero.quiereSubir(this)) {
-      throw new Error("No se puede subir el pasajero: no hay lugar en el micro o el pasajero no quiere subir");
+    if (this.getLugaresLibresTotales() <= 0) {
+      throw new Error("No se puede subir el pasajero: no hay lugar en el micro");
+    }
+
+    if (!pasajero.quiereSubir(this)) {
+      throw new Error("No se puede subir el pasajero: el pasajero no quiere subir");
     }
 
     if (this.getAsientosDisponible() > 0) {
