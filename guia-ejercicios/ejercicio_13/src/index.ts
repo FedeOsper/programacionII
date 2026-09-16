@@ -1,6 +1,3 @@
-import { Robot } from "./robot";
-import { Oruga } from "./sistema-de-traccion/oruga";
-
 /**
  * El laboratorio Kokumo Technologies está desarrollando el prototipo de un robot explorador cuyo
  * sistema de tracción puede ser personalizado para que se adapte mejor al terreno.
@@ -20,13 +17,41 @@ import { Oruga } from "./sistema-de-traccion/oruga";
  * Número de serie, potencia de tracción final, tipo de tracción, cuanto puede avanzar y
  * datos sobre cualquier característica adicional que posea.
 */
+import { Robot } from "./robot";
+import { Oruga } from "./sistema-de-traccion/oruga";
+import { RuedaDeCaucho } from "./sistema-de-traccion/rueda-de-caucho";
+
+function mostrarDatos(robot: Robot): void {
+
+    console.log("----------------------------------");
+    console.log("Nombre:", robot.getNombre());
+    console.log("Número de serie:", robot.getNumeroSerie());
+    console.log("Potencia final:", robot.getPotenciaTraccionFinal(), "hp");
+    console.log("Tipo de tracción:", robot.getTipoDeTraccion());
+    console.log("Puede avanzar:", robot.getVidaUtil(), "km");
+
+    const traccion = robot.getSistemaTraccion();
+
+    if (traccion instanceof Oruga) {
+        console.log("Sensor de temperatura:", traccion.getTemperatura(), "°C");
+    }
+
+    console.log("----------------------------------\n");
+}
 
 function main(): void {
-  console.log("hola");
 
-  const traccion = new Oruga();
-  const robot = new Robot(traccion);
-  console.log(robot.getNombre());
+    const rueda = new RuedaDeCaucho();
+    const robotConRueda = new Robot(rueda);
+
+    const oruga = new Oruga();
+    const robotConOruga = new Robot(oruga);
+
+    console.log("ROBOT CON RUEDA DE CAUCHO");
+    mostrarDatos(robotConRueda);
+
+    console.log("ROBOT CON ORUGA");
+    mostrarDatos(robotConOruga);
 }
 
 main();

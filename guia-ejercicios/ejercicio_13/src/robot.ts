@@ -40,4 +40,8 @@ export class Robot {
     return this.sistemaTraccion.getVidaUtil();
   }
 
+  public getSistemaTraccion(): SistemaDeTraccion {
+    return this.sistemaTraccion;
+}
+
 }

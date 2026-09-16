@@ -10,7 +10,7 @@ export class Oruga extends SistemaDeTraccion {
     const vidaUtilInicial = 400;
     const potenciaBase = 3;
     super(vidaUtilInicial, potenciaBase);
-    this.nombre = "Rueda XX";
+    this.nombre = "Oruga XX";
 
     // ESTO NO ES CORRECTO 👇!!
     this.sensorTemperatura = new SensorTemperatura();
